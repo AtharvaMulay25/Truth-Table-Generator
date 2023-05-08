@@ -1,8 +1,12 @@
 //Author: AtharvaMulay25
+//Date:  Aug, 2022   
 //Title: This program draws the truth-table for a given boolean expression.
 
-
-
+/*
+    Symbols used in program:         \', + , . , (, ), ()', ^  
+    Supported boolean operators:    NOT, OR, AND, XOR, NAND, NOR, XNOR
+    Associativity:                  Left to right associtivity used in this program           
+*/
 
 #include <bits/stdc++.h>
 using namespace std;
