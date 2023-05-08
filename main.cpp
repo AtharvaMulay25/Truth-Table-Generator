@@ -180,3 +180,51 @@ void setBitValues(long int world)
         truth_values[world].push_back(bits[i]);
     }
 }
+
+//evaluates the value of postfix string for a given set of bit values of variables (i.e for a particular row/world)
+int evaluatePostFix(string postfix)
+{
+    stack<int> evalPostfix;
+
+    //evaluating the postfix string using evalPostfix stack
+    for (int i = 0; i < postfix.size(); i++)
+    {
+        if (isalpha(postfix[i]))
+        {
+            evalPostfix.push(bitValues[postfix[i]]);
+        }
+        else if (postfix[i] == '.')
+        {
+            int val1 = evalPostfix.top();
+            evalPostfix.pop();
+            int val2 = evalPostfix.top();
+            evalPostfix.pop();
+            evalPostfix.push(val1 & val2);
+        }
+        else if (postfix[i] == '+')
+        {
+            int val1 = evalPostfix.top();
+            evalPostfix.pop();
+            int val2 = evalPostfix.top();
+            evalPostfix.pop();
+            evalPostfix.push(val1 | val2);
+        }
+        else if (postfix[i] == '\'')
+        {
+            int val1 = evalPostfix.top();
+            evalPostfix.pop();
+            evalPostfix.push(1 - val1);
+        }
+        else if(postfix[i] == '^')
+        {
+            int val1 = evalPostfix.top();
+            evalPostfix.pop();
+            int val2 = evalPostfix.top();
+            evalPostfix.pop();
+            evalPostfix.push(val1^val2);
+        }
+    }
+
+    // cout << "Evaluated ans: " << evalPostfix.top() << endl;
+    return evalPostfix.top();
+}
