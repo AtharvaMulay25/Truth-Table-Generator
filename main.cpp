@@ -228,3 +228,55 @@ int evaluatePostFix(string postfix)
     // cout << "Evaluated ans: " << evalPostfix.top() << endl;
     return evalPostfix.top();
 }
+
+
+//prints the entire truth table.
+void printTruthTable()
+{
+
+    //To print the truth-table in the following way.
+    // +---+---+---+---+       //drawline contains "+---+---+---+\n"
+    // | a | b | c | F |       //partition contains "| "
+    // +---+---+---+---+       // getonNextLine contains "|\n"
+    //
+
+     //setting all drawing strings
+    string drawLine, partition, getOnNextLine;
+    drawLine.push_back('+');
+    for (int i = 1; i <= (nofvar + 1); i++)
+    {
+        drawLine.append("---+");
+    }
+    drawLine.append("\n");
+    partition.append("| ");
+    getOnNextLine.append("|\n");
+    //
+
+    cout << "The truth-table of given function is: \n";
+    // printing the first row (first 3 rows)
+    cout << drawLine;
+    for (auto variables : input_variables)
+    {
+        cout << partition << variables << " ";
+    }
+    cout << partition << "F " << getOnNextLine;
+    cout << drawLine;
+    //
+
+    // printing the rest rows
+    int rows = 0;  //rows stors the no. of worlds/ rows in the truth-table.
+    for (int j = 0; j < pow(2, nofvar); j++)
+    {   
+        rows++;
+        for (auto truth_value : truth_values[j])
+        {
+            cout << partition << truth_value << " ";
+        }
+        cout << getOnNextLine;
+        cout << drawLine;
+    }
+    //
+
+    cout << endl;
+    cout<<"No of rows in the truth-table: "<<rows<<endl<<endl;
+}
